@@ -26,7 +26,6 @@ import java.awt.event.MouseEvent;
 
 
 public class table {
-	private static JTextField textID;
 	private static JTextField textOnoma;
 	private static JTextField textKostos;
 	private static JTextField textAtoma;
@@ -59,14 +58,6 @@ public class table {
         table.setRowHeight(30);
         table.setAutoCreateRowSorter(true);
         
-       
-        
-        textID = new JTextField();
-        textID.setBounds(86, 423, 45, 19);
-        frame.getContentPane().add(textID);
-        textID.setColumns(10);
-        textID.setVisible(true);
-        
         textOnoma = new JTextField();
         textOnoma.setBounds(104, 456, 120, 25);
         frame.getContentPane().add(textOnoma);
@@ -78,16 +69,6 @@ public class table {
         frame.getContentPane().add(textKostos);
         textKostos.setColumns(10);
         textKostos.setVisible(true);
-        
-       
-       
-        
-        JLabel lblID = new JLabel("ID");
-        lblID.setFont(new Font("Tahoma", Font.PLAIN, 19));
-        lblID.setForeground(Color.WHITE);
-        lblID.setBounds(36, 417, 40, 22);
-        frame.getContentPane().add(lblID);
-        lblID.setEnabled(true);
         
         JLabel lblOnoma = new JLabel("\u038C\u03BD\u03BF\u03BC\u03B1");
         lblOnoma.setFont(new Font("Dialog", Font.PLAIN, 19));
@@ -182,7 +163,7 @@ public class table {
         		DefaultTableModel tblModel=(DefaultTableModel) table.getModel();
         		if(table.getSelectedRowCount()>=0) {
         			String name=textOnoma.getText();
-        			String id=textID.getText();
+        			String id="";
         			row[2]=comboBox1.getSelectedItem();
         			tblModel.setValueAt(id, table.getSelectedRow(), 0);
         			tblModel.setValueAt(name, table.getSelectedRow(), 1);
@@ -196,14 +177,17 @@ public class table {
         btnAdd.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
-        		
+        		if (textOnoma.getText().equals(""))
+        			JOptionPane.showMessageDialog(frame,"Εισάγετε Όνομα");
+        		else
+        		{
         		
         		row[0]= k;
-        		k++;
+        		k++;        		
         		row[1]= textOnoma.getText();
-        		
+        		textOnoma.setText("");
         		model.addRow(row);
-        		
+        		}
         	}
         });
                
@@ -219,7 +203,7 @@ public class table {
         			for (int j=i; j<model.getRowCount();j++)
         			{
         				model.setValueAt(j+1+"", j, 0);
-        			}    			
+        			}     			
         		}
         		else {
         			JOptionPane.showMessageDialog(frame,"Delete Error");
