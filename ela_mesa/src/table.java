@@ -30,8 +30,9 @@ public class table {
 	private static JTextField textOnoma;
 	private static JTextField textKostos;
 	private static JTextField textAtoma;
-  
+    private static int k=1;
 	public static void main(String[] args) {
+	
 		JTable table=new JTable();
         Object[] columns = {"ID", "ONOMA", "METRHTA-KARTA"};
         DefaultTableModel model = new DefaultTableModel();
@@ -194,20 +195,31 @@ public class table {
         
         btnAdd.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		row[0]= textID.getText();
+        		
+        		
+        		
+        		row[0]= k;
+        		k++;
         		row[1]= textOnoma.getText();
         		
         		model.addRow(row);
         		
         	}
         });
-        
+               
       
         btlDelete.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		int i=table.getSelectedRow();
         		if(i>=0) {
+        			
         			model.removeRow(i);	
+        			
+        			for (int j=i; j<model.getRowCount();j++)
+        			{
+        				model.setValueAt(j+1+"", j, 0);
+        			}    			
         		}
         		else {
         			JOptionPane.showMessageDialog(frame,"Delete Error");
@@ -221,21 +233,7 @@ public class table {
         frame.getContentPane().add(btnUpdate);
         
         JScrollPane pane =new JScrollPane(table);
-        pane.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		DefaultTableModel tblModel=(DefaultTableModel)table.getModel();
-        		
-        		String tblID=tblModel.getValueAt(table.getSelectedRow(),0).toString();
-        		String tblName=tblModel.getValueAt(table.getSelectedRow(),1).toString();
-        		String tblCombo=tblModel.getValueAt(table.getSelectedRow(),2).toString();
-        		
-        	    textID.setText(tblID);
-        	    textOnoma.setText(tblName);
-        	    
-        		
-        	}
-        });
+        
         pane.setForeground((Color.RED));
         pane.setBackground((Color.WHITE));
         pane.setBounds(36,122,625,285);
