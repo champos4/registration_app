@@ -178,7 +178,7 @@ public class table {
         	public void actionPerformed(ActionEvent e) {
         		
         		if (textOnoma.getText().equals(""))
-        			JOptionPane.showMessageDialog(frame,"Εισάγετε Όνομα");
+        			JOptionPane.showMessageDialog(frame,"Vale onoma");
         		else
         		{
         		
@@ -186,6 +186,7 @@ public class table {
         		k++;        		
         		row[1]= textOnoma.getText();
         		textOnoma.setText("");
+        		row[2]=comboBox1.getSelectedItem();
         		model.addRow(row);
         		}
         	}
