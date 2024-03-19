@@ -163,9 +163,9 @@ public class table {
         		DefaultTableModel tblModel=(DefaultTableModel) table.getModel();
         		if(table.getSelectedRowCount()>=0) {
         			String name=textOnoma.getText();
-        			String id="";
+        			
         			row[2]=comboBox1.getSelectedItem();
-        			tblModel.setValueAt(id, table.getSelectedRow(), 0);
+        			
         			tblModel.setValueAt(name, table.getSelectedRow(), 1);
         			tblModel.setValueAt(row[2],table.getSelectedRow(), 2);
         		}
